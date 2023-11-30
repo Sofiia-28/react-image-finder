@@ -39,7 +39,7 @@ export const App = () => {
     }
 
     getImages();
-  }, [page, query, id]);
+  }, [page, query, id, error]);
 
   const handleSubmit = newQuery => {
     setQuery(newQuery);
