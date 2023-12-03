@@ -24,7 +24,6 @@ export const MyModal = ({ largeImage, tags, onClose, isOpen }) => {
       contentLabel="Modal"
     >
       <img
-        onClick={onClose}
         src={largeImage}
         alt={tags}
         className="modal-image"
