@@ -12,7 +12,6 @@ export const App = () => {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [id, setId] = useState(null);
   const [showBtn, setShowBtn] = useState();
 
@@ -21,16 +20,13 @@ export const App = () => {
       if (query !== '') {
         try {
           setIsLoading(true);
-          setError(false);
-          const initialSearch = await fetchPictures(query, page);
-          const { hits, total } = initialSearch;
+          const { hits, total } = await fetchPictures(query, page);
           setImages(prevState => [...prevState.concat(hits)]);
           setShowBtn(page < Math.ceil(total / 12));
         } catch (error) {
           Notiflix.Notify.failure(
             'Oops, something went wrong, try reloading the page'
           );
-          setError(true);
         } finally {
           setIsLoading(false);
         }
@@ -38,7 +34,7 @@ export const App = () => {
     }
 
     getImages();
-  }, [page, query, id, error]);
+  }, [page, query, id]);
 
   const handleSubmit = newQuery => {
     setQuery(newQuery);
